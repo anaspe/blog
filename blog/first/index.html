@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Math rendering -->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+        </script>
+
+        
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        
+
+        <title></title>
+
+        
+            <link rel="stylesheet" href="https://anaspe.github.io/theme.css">
+        
+        
+    </head>
+    <body>
+        <div class="content">
+        
+        
+            <header>
+                <div class="header-left">
+                    <a href="https:&#x2F;&#x2F;anaspe.github.io" class="logo"></a>
+                </div>
+                <div class="header-right">
+                    <nav itemscope itemtype="http://schema.org/SiteNavigationElement">
+                      <ul>
+                        
+                        
+                            
+                            <li class="nav">
+                                <a itemprop="url" href="https://anaspe.github.io/blog/">
+                                    <span itemprop="name">List of blog posts</span>
+                                </a>
+                            </li>
+                        
+                        
+                        
+                      </ul>
+                    </nav>
+                </div>
+            </header>
+        
+        
+<h1 class="title">
+  uwu
+</h1>
+<p class="subtitle"><strong>2010-10-10</strong></p>
+<p>Hello and welcome to this personal blog of mine! don't expect much except hopefully weekly brain farts, since that's all i can produce for now :3</p>
+<p>im grinding for my national OI so i guess that's something to lock in for and write about, fingers crossed i don't waste this year too 🙏</p>
+<p>my country does this silly thing where they make us take random contests (mostly from AtCoder and Codeforces) each Saturday and Sunday, tomorrow we have one for AtCoder and im looking for a good performance since i messed up the last Codeforces one, hopefully i'll make a writeup for this one</p>
+<p>ehhhh yeah that's it, hopefully i don't give up on blogging 😭</p>
+<p>testing some features of zola (the SSG im using):</p>
+<h4 id="code">Code:</h4>
+<pre data-lang="c++" style="background-color:#2b303b;color:#c0c5ce;" class="language-c++ "><code class="language-c++" data-lang="c++"><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">apply</span><span>(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">p</span><span>, </span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">value</span><span>) {
+</span><span>  t[p] += value;
+</span><span>  </span><span style="color:#b48ead;">if </span><span>(p &lt; n) d[p] += value;
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">build</span><span>(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">p</span><span>) {
+</span><span>  </span><span style="color:#b48ead;">while </span><span>(p &gt; </span><span style="color:#d08770;">1</span><span>) p &gt;&gt;= </span><span style="color:#d08770;">1</span><span>, t[p] = </span><span style="color:#bf616a;">max</span><span>(t[p&lt;&lt;</span><span style="color:#d08770;">1</span><span>], t[p&lt;&lt;</span><span style="color:#d08770;">1</span><span>|</span><span style="color:#d08770;">1</span><span>]) + d[p];
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">push</span><span>(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">p</span><span>) {
+</span><span>  </span><span style="color:#b48ead;">for </span><span>(</span><span style="color:#b48ead;">int</span><span> s = h; s &gt; </span><span style="color:#d08770;">0</span><span>; --s) {
+</span><span>    </span><span style="color:#b48ead;">int</span><span> i = p &gt;&gt; s;
+</span><span>    </span><span style="color:#b48ead;">if </span><span>(d[i] != </span><span style="color:#d08770;">0</span><span>) {
+</span><span>      </span><span style="color:#bf616a;">apply</span><span>(i&lt;&lt;</span><span style="color:#d08770;">1</span><span>, d[i]);
+</span><span>      </span><span style="color:#bf616a;">apply</span><span>(i&lt;&lt;</span><span style="color:#d08770;">1</span><span>|</span><span style="color:#d08770;">1</span><span>, d[i]);
+</span><span>      d[i] = </span><span style="color:#d08770;">0</span><span>;
+</span><span>    }
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">void </span><span style="color:#8fa1b3;">inc</span><span>(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">l</span><span>, </span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">r</span><span>, </span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">value</span><span>) {
+</span><span>  l += n, r += n;
+</span><span>  </span><span style="color:#b48ead;">int</span><span> l0 = l, r0 = r;
+</span><span>  </span><span style="color:#b48ead;">for </span><span>(; l &lt; r; l &gt;&gt;= </span><span style="color:#d08770;">1</span><span>, r &gt;&gt;= </span><span style="color:#d08770;">1</span><span>) {
+</span><span>    </span><span style="color:#b48ead;">if </span><span>(l&amp;</span><span style="color:#d08770;">1</span><span>) </span><span style="color:#bf616a;">apply</span><span>(l++, value);
+</span><span>    </span><span style="color:#b48ead;">if </span><span>(r&amp;</span><span style="color:#d08770;">1</span><span>) </span><span style="color:#bf616a;">apply</span><span>(--r, value);
+</span><span>  }
+</span><span>  </span><span style="color:#bf616a;">build</span><span>(l0);
+</span><span>  </span><span style="color:#bf616a;">build</span><span>(r0 - </span><span style="color:#d08770;">1</span><span>);
+</span><span>}
+</span><span>
+</span><span style="color:#b48ead;">int </span><span style="color:#8fa1b3;">query</span><span>(</span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">l</span><span>, </span><span style="color:#b48ead;">int </span><span style="color:#bf616a;">r</span><span>) {
+</span><span>  l += n, r += n;
+</span><span>  </span><span style="color:#bf616a;">push</span><span>(l);
+</span><span>  </span><span style="color:#bf616a;">push</span><span>(r - </span><span style="color:#d08770;">1</span><span>);
+</span><span>  </span><span style="color:#b48ead;">int</span><span> res = -</span><span style="color:#d08770;">2e9</span><span>;
+</span><span>  </span><span style="color:#b48ead;">for </span><span>(; l &lt; r; l &gt;&gt;= </span><span style="color:#d08770;">1</span><span>, r &gt;&gt;= </span><span style="color:#d08770;">1</span><span>) {
+</span><span>    </span><span style="color:#b48ead;">if </span><span>(l&amp;</span><span style="color:#d08770;">1</span><span>) res = </span><span style="color:#bf616a;">max</span><span>(res, t[l++]);
+</span><span>    </span><span style="color:#b48ead;">if </span><span>(r&amp;</span><span style="color:#d08770;">1</span><span>) res = </span><span style="color:#bf616a;">max</span><span>(t[--r], res);
+</span><span>  }
+</span><span>  </span><span style="color:#b48ead;">return</span><span> res;
+</span><span>}
+</span></code></pre>
+<h4 id="math">Math:</h4>
+<p>$$\int_{i=0}^n x^i = x^{i+1}$$</p>
+
+
+        <footer>
+            
+            <div class="border"></div>
+        
+        </footer>
+    
+        </div>
+    </body>
+</html>
